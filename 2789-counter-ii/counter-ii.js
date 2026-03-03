@@ -6,11 +6,11 @@ var createCounter = function(init) {
     let current = init;
     return {
         increment : ()=>{
-            current++;
+            ++current;
             return current;
         },
         decrement : ()=>{
-            current--;
+            --current;
             return current;
         },
         reset : ()=>{
