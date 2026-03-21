@@ -1,46 +1,30 @@
 class Solution {
 public:
-    string minWindow(string text, string pattern) {
-
-        if (pattern.length() > text.length()) return "";
-
-        vector<int> count(256, 0);
-
-        for (char ch : pattern) {
-            count[ch]++;
+    string minWindow(string s, string t) {
+        int n = s.size() , m = t.size();
+        int hash[256] = {0};
+        for(int i=0;i<m;i++){
+            hash[t[i]]++;
         }
 
-        int start = 0;
-        int matched = 0;
-        int minStart = 0;
-        int minSize = INT_MAX;
+        int left = 0 , right = 0 , minLen = INT_MAX , sIndex = -1 , count = 0;
 
-        for (int i = 0; i < text.length(); i++) {
-
-            count[text[i]]--;
-
-            if (count[text[i]] >= 0) {
-                matched++;
+        while(right < n){
+            if(hash[s[right]] > 0){
+                count++;
             }
-
-            while (matched == pattern.length()) {
-
-                if (i - start + 1 < minSize) {
-                    minSize = i - start + 1;
-                    minStart = start;
+            hash[s[right]]--;
+            while(count == m){
+                if((right - left + 1) < minLen){
+                    minLen = right - left + 1;
+                    sIndex = left;
                 }
-
-                count[text[start]]++;
-
-                if (count[text[start]] > 0) {
-                    matched--;
-                }
-
-                start++;
+                hash[s[left]]++;
+                if(hash[s[left]] > 0) count--;
+                left++;
             }
+            right++;
         }
-
-        if(minSize == INT_MAX) return "";
-        return text.substr(minStart, minSize);
+        return sIndex == -1 ? "" : s.substr(sIndex , minLen);
     }
 };
