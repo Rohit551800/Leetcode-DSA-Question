@@ -5,7 +5,11 @@ public:
         int ans = INT_MAX;
         for(int i=0;i<n;i++){
             if(nums[i] == target){
-                ans = min(ans , abs(i - start));
+                int ans1 =abs(i - start);
+
+                if(ans1 < ans){
+                    ans = ans1;
+                }
             }
         }
         return ans;
