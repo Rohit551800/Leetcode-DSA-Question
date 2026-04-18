@@ -5,7 +5,6 @@ public:
         for(int i=0;i<nums.size();i++){
             sum += nums[i];
         }
-        int ans = k - (sum % k);
-        return k - ans;
+        return sum % k;
     }
 };
