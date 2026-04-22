@@ -3,7 +3,7 @@
 <p>Determine whether the largest element in the array is <strong>at least twice</strong> as much as every other number in the array. If it is, return <em>the <strong>index</strong> of the largest element, or return </em><code>-1</code><em> otherwise</em>.</p>
 
 <p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+<p><strong class="example">Example 11:</strong></p>
 
 <pre>
 <strong>Input:</strong> nums = [3,6,1,0]
