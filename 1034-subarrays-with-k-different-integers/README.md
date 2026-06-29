@@ -3,7 +3,7 @@
 <p>A <strong>good array</strong> is an array where the number of different integers in that array is exactly <code>k</code>.</p>
 
 <ul>
-	<li>For example, <code>[1,2,3,1,2]</code> has <code>3</code> different integers: <code>1</code>, <code>2</code>, and <code>3</code>.</li>
+	<li>For example, <code>[1,2,3,1,2]</code> has <code>3</code> diff integers: <code>1</code>, <code>2</code>, and <code>3</code>.</li>
 </ul>
 
 <p>A <strong>subarray</strong> is a <strong>contiguous</strong> part of an array.</p>
