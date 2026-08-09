@@ -6,12 +6,12 @@ public:
             if(it == '(' || it == '[' || it == '{') st.push(it);
             else if(st.empty()) return false;
             else{
-                char c = st.top();
-                st.pop();
-                if(it == ')'  && c == '(' ||
-                it == ']' && c == '[' || 
-                it == '}' && c == '{'){
-
+                // char c = st.top();
+                // st.pop();
+                if(it == ')'  && st.top() == '(' ||
+                it == ']' && st.top() == '[' || 
+                it == '}' && st.top() == '{'){
+                    st.pop();
                 }
                 else return false;
             }
