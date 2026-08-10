@@ -16,13 +16,9 @@ public:
     }
     int splitArray(vector<int>& nums, int k) {
         int n = nums.size();
-        // if(n < k) return -1;
         int low = *max_element(nums.begin() , nums.end());
         int high = accumulate(nums.begin() , nums.end() , 0);
-
-
         //Bruteforce Solution
-
         // for(int i=low;i<=high;i++){
         //     int count = canWeSplit(nums , i);
         //     if(count <= k){
@@ -31,7 +27,6 @@ public:
         // }
 
         //Optimal Solution
-
         while(low <= high){
             int mid = low + high >> 1;
             int count = canWeSplit(nums , mid);
