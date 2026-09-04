@@ -19,16 +19,29 @@ public:
         // return f(n-1 , m-1 , s , t , dp);
 
         //Tabulation
-        vector<vector<int>>dp(n+1 , vector<int>(m+1 , 0));
-        for(int j=0;j<=n;j++){
-            dp[j][0] = 1;
-        }
+        // vector<vector<int>>dp(n+1 , vector<int>(m+1 , 0));
+        // for(int j=0;j<=n;j++){
+        //     dp[j][0] = 1;
+        // }
+        // for(int i=1;i<=n;i++){
+        //     for(int j=1;j<=m;j++){
+        //         if(s[i-1] == t[j-1]) dp[i][j] = dp[i-1][j-1]%mod + dp[i-1][j]%mod;
+        //         else dp[i][j] = dp[i-1][j];
+        //     }
+        // }
+        // return dp[n][m];
+
+        //Space Optimization
+
+        vector<int>prev(m+1 , 0) , curr(m+1 , 0);
+        prev[0] = 1 , curr[0] = 1;
         for(int i=1;i<=n;i++){
             for(int j=1;j<=m;j++){
-                if(s[i-1] == t[j-1]) dp[i][j] = dp[i-1][j-1]%mod + dp[i-1][j]%mod;
-                else dp[i][j] = dp[i-1][j];
+                if(s[i-1] == t[j-1]) curr[j] = prev[j-1]%mod + prev[j]%mod;
+                else curr[j] = prev[j];
             }
+            prev = curr;
         }
-        return dp[n][m];
+        return curr[m];
     }
 };
