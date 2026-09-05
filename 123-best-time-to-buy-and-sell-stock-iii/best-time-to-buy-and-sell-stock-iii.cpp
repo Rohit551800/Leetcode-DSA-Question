@@ -13,7 +13,33 @@ public:
         return dp[ind][buy][T] = profit;
     }
     int maxProfit(vector<int>& prices) {
-        vector<vector<vector<int>>>dp(prices.size() , vector<vector<int>>(2 , vector<int>(3 , -1)));
-        return f(0 , 1 , 0 ,prices , 2 , dp);
+        int n = prices.size();
+        //Recursion + Memoization
+        // vector<vector<vector<int>>>dp(prices.size() , vector<vector<int>>(2 , vector<int>(3 , -1)));
+        // return f(0 , 1 , 0 ,prices , 2 , dp);
+
+        // Tabulation
+        vector<vector<vector<int>>>dp(prices.size()+1 , vector<vector<int>>(2 , vector<int>(3 , 0)));
+
+        // Base Case
+        // if(ind == prices.size() || T == 0) return 0;
+        dp[0][0][0] = dp[0][1][0] = 0;
+        //Explore all the paths
+        for(int ind = n-1;ind >= 0;ind--){
+            for(int buy = 0;buy <= 1 ; buy++){
+                for(int T = 2;T > 0 ; T--){
+                    int profit = 0;
+                    if(buy && T){
+                        profit = max(-prices[ind] + dp[ind + 1][0][T], 0 + dp[ind + 1][1][T]);
+                    }
+                    else{
+                        profit = max(+prices[ind] + dp[ind + 1][1][T-1], 0 + dp[ind + 1][0][T]);
+                    }
+
+                    dp[ind][buy][T] = profit;
+                }
+            }
+        }
+        return dp[0][1][2];
     }
 };
