@@ -25,31 +25,35 @@ public:
     }
     bool isMatch(string s, string t) {
         int n = s.size() , m = t.size();
-        vector<vector<int>>dp(n , vector<int>(m , -1));
-        return f(n-1 , m-1 ,s , t , dp);
-        // Space Optimization
+        // vector<vector<int>>dp(n , vector<int>(m , -1));
+        // return f(n-1 , m-1 ,s , t , dp);
 
-        vector<bool>prev(m+1 , false) , curr(m+1);
+        // Tabulation
+        vector<vector<int>>dp(n+1 , vector<int>(m+1 , 0));
 
-        //Base case
-        prev[0] = true;
 
-        for(int j = 1; j <= m; j++){
-            if(t[j-1] == '*'){
-                prev[j] = prev[j-1];
+        //Base Case
+        dp[0][0] = true;
+        for (int j = 1; j <= m; j++) {
+            if (t[j - 1] == '*') {
+                dp[0][j] = dp[0][j - 2]; 
             }
         }
         // Explore all the paths
-
         for(int i=1;i<=n;i++){
-            curr[0] = false;
             for(int j=1;j<=m;j++){
-                if(s[i-1] == t[j-1] || t[j-1] == '.') curr[j] = prev[j-1];
-                else if(t[j-1] == '*') curr[j] = curr[j-1]|| prev[j] ;
-                else curr[j] = false;
+                if(s[i-1] == t[j-1] || t[j-1] == '.')dp[i][j] = dp[i-1][j-1];
+                else if(t[j-1] == '*'){
+                    bool one = dp[i][j-2];
+                    bool more = false;
+                    if(t[j-2] == s[i-1] || t[j-2] == '.'){
+                        more = dp[i-1][j];
+                    }
+                    dp[i][j] = one || more;
+                }
+                else dp[i][j] = false;
             }
-            prev = curr;
         }
-        return prev[m];
+        return dp[n][m];
     }
 };
