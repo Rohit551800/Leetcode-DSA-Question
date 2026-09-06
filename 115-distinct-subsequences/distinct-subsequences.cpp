@@ -33,7 +33,7 @@ public:
 
         //Space Optimization
 
-        vector<int>prev(m+1 , 0) , curr(m+1 , 0);
+        vector<int>prev(m+1 , 0);
         prev[0] = 1;
         for(int i=1;i<=n;i++){
             for(int j=m;j>=1;j--){
