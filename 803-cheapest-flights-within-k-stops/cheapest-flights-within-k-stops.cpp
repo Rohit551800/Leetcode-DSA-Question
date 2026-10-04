@@ -30,7 +30,7 @@ public:
 
                 int totalP = p + price;
                 
-                if(dist[nbr] > totalP && stop <= k){
+                if(dist[nbr] > totalP){
                     dist[nbr] = totalP;
                     q.push({stop+1 , {nbr , totalP}});
                 }
