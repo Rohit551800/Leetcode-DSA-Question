@@ -8,12 +8,8 @@ public:
         for(int i=1;i<n;i++){
             int a = intervals[i][0];
             int b = intervals[i][1];
-
-            if(a <= ans.back()[1] && b <= ans.back()[1]){
-                
-            }
-            else if(a <= ans.back()[1] && b > ans.back()[1]){
-                ans.back()[1] = b;
+            if(ans.back()[1] >= a){
+                ans.back()[1] = max(ans.back()[1] , b);
             }
             else{
                 ans.push_back({a , b});
