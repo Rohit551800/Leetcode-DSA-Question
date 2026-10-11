@@ -2,26 +2,26 @@ class Solution {
 public:
     int minSubarray(vector<int>& nums, int p) {
         int n = nums.size();
-        //total sum - p = target
-        long long total = 0;
-        for(auto it : nums) total += it;
-
+        int total = 0;
+        for(int x : nums){
+            total = (total + x) % p;
+        }
         int target = total % p;
+
         if(target == 0) return 0;
-        int pre = 0;
-        int ans = n;
+        int prefix = 0;
+        int minLen = INT_MAX;
         unordered_map<int , int>mpp;
         mpp[0] = -1;
 
         for(int i=0;i<n;i++){
-            pre = (pre + nums[i]) % p;
-            int rem = (pre - target + p) % p;
-
+            prefix = (prefix + nums[i]) % p;
+            int rem = (prefix - target + p) % p;
             if(mpp.count(rem)){
-                ans = min(ans , i - mpp[rem]);
+                minLen = min(minLen , i-mpp[rem]);
             }
-            mpp[pre] = i;
+            mpp[prefix] = i;
         }
-        return ans == n ? -1 : ans;
+        return minLen == INT_MAX || minLen == n ? -1 : minLen;
     }
 };
