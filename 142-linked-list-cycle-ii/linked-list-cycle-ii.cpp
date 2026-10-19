@@ -8,29 +8,29 @@
  */
 class Solution {
 public:
-    ListNode* detectLoop(ListNode* head){
+    ListNode* hasCycle(ListNode *head) {
+        if(!head || !head->next) return nullptr;
         ListNode* slow = head;
         ListNode* fast = head;
 
-        while(fast != nullptr && fast->next != nullptr){
+        while(fast && fast->next){
             fast = fast->next->next;
             slow = slow->next;
 
-            if(slow == fast) return slow;
+            if(fast == slow) return slow;
         }
         return nullptr;
     }
     ListNode *detectCycle(ListNode *head) {
-        if(head == nullptr || head->next == nullptr)return nullptr;
-        if(!detectLoop(head)) return nullptr;
-        ListNode* meetingPoint = detectLoop(head);
-        ListNode* temp = head;
 
-        int counter = 0;
-        while(temp != meetingPoint){
-            temp = temp->next;
-            meetingPoint = meetingPoint->next;
+        ListNode* fast = hasCycle(head);
+        if(!fast) return nullptr;
+        ListNode* slow = head;
+
+        while(slow != fast){
+            slow = slow->next;
+            fast = fast->next;
         }
-        return temp;
+        return slow;
     }
 };
